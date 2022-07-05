@@ -173,6 +173,7 @@ impl<MI: Metric, MO: Measure> PrivacyRelation<MI, MO> {
     pub fn new_from_constant(c: MO::Distance) -> Self where
         MI::Distance: InfCast<MO::Distance> + Clone,
         MO::Distance: DistanceConstant<MI::Distance> {
+        #[allow(clippy::needless_question_mark)]
         PrivacyRelation::new_all(
             enclose!(c, move |d_in: &MI::Distance, d_out: &MO::Distance|
                 Ok(d_out.clone() >= MO::Distance::inf_cast(d_in.clone())?.inf_mul(&c)?)),
@@ -306,6 +307,7 @@ impl<MI: Metric, MO: Metric> StabilityRelation<MI, MO> {
     pub fn new_from_constant(c: MO::Distance) -> Self where
         MI::Distance: InfCast<MO::Distance> + Clone,
         MO::Distance: DistanceConstant<MI::Distance> {
+        #[allow(clippy::needless_question_mark)]
         StabilityRelation::new_all(
             // relation
             enclose!(c, move |d_in: &MI::Distance, d_out: &MO::Distance|
