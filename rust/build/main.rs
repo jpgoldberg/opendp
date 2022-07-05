@@ -84,7 +84,7 @@ impl Argument {
         self.c_type.clone().expect("unknown c_type when parsing argument")
     }
     fn c_type_origin(&self) -> String {
-        self.c_type().split("<").next().unwrap().to_string()
+        self.c_type().split('<').next().unwrap().to_string()
     }
 }
 
@@ -150,7 +150,7 @@ fn write_bindings(files: IndexMap<PathBuf, String>) {
 
 #[allow(dead_code)]
 fn indent(text: String) -> String {
-    text.split("\n").map(|v| format!("    {}", v)).collect::<Vec<_>>().join("\n")
+    text.split('\n').map(|v| format!("    {}", v)).collect::<Vec<_>>().join("\n")
 }
 
 /// resolve references to derived types
