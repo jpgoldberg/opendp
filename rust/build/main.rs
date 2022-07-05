@@ -91,6 +91,7 @@ impl Argument {
 // RuntimeType contains the metadata to generate code that evaluates to a rust type name
 #[derive(Deserialize, Debug, PartialEq, Clone)]
 #[serde(untagged)]
+#[allow(clippy::vec_box)] // A little extra boxing makes this layered enum work.
 enum RuntimeType {
     // reference an existing RuntimeType
     Name(String),
