@@ -21,6 +21,11 @@ impl Domain for PolyDomain {
     type Carrier = Box<dyn Any>;
     fn member(&self, _val: &Self::Carrier) -> Fallible<bool> { Ok(true) }
 }
+impl Default for PolyDomain {
+    fn default() -> Self {
+         Self::new()
+    }
+}
 
 impl<DI, DO> Function<DI, DO>
     where DI: 'static + Domain,
