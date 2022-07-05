@@ -12,6 +12,7 @@ use crate::{
     traits::InfAdd,
 };
 
+#[allow(clippy::ptr_arg)]
 pub trait SequentialCompositionStaticDistancesMeasure: Measure {
     fn compose(&self, d_i: &Vec<Self::Distance>) -> Fallible<Self::Distance>;
 }

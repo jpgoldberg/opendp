@@ -215,6 +215,7 @@ impl SequentialCompositionStaticDistancesMeasure for AnyMeasure {
             self_: &AnyMeasure, d_i: &Vec<AnyObject>
         ) -> Fallible<AnyObject> {
 
+            #[allow(clippy::ptr_arg)]
             fn monomorphize2<M: 'static + SequentialCompositionStaticDistancesMeasure>(
                 self_: &AnyMeasure, d_i: &Vec<AnyObject>
             ) -> Fallible<AnyObject>
