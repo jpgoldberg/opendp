@@ -27,7 +27,7 @@ pub fn generate_bindings(modules: IndexMap<String, Module>) -> IndexMap<PathBuf,
     #[allow(clippy::redundant_clone)] // borrow checker fails without this clone
     modules.into_iter()
         .map(|(module_name, module)| (
-            PathBuf::from(format!("{}.py", if module_name == "data".to_string() {"_data".to_string()} else {module_name.clone()})),
+            PathBuf::from(format!("{}.py", if module_name == *"data" {"_data".to_string()} else {module_name.clone()})),
             generate_module(module_name, module, &typemap, &hierarchy)
         ))
         .collect()
@@ -87,8 +87,8 @@ def {func_name}(
             func_name = func_name,
             args = crate::indent(args),
             sig_return = sig_return,
-            docstring = crate::indent(generate_docstring(&func, func_name, hierarchy)),
-            body = crate::indent(generate_body(module_name, func_name, &func, typemap)))
+            docstring = crate::indent(generate_docstring(func, func_name, hierarchy)),
+            body = crate::indent(generate_body(module_name, func_name, func, typemap)))
 }
 
 
@@ -218,6 +218,7 @@ fn generate_docstring_arg(arg: &Argument, hierarchy: &HashMap<String, Vec<String
             description = arg.description.clone().unwrap_or_default())
 }
 
+#[allow(clippy::ptr_arg)] // Not going to change how this is called.
 /// generate the part of a docstring corresponding to a return argument
 fn generate_docstring_return_arg(arg: &Argument, func_name: &String, hierarchy: &HashMap<String, Vec<String>>) -> String {
     let mut ret = Vec::new();
