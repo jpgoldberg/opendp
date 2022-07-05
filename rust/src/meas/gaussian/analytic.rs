@@ -164,6 +164,7 @@ mod tests {
 
     // these are more accurate
     #[test]
+    #[allow(clippy::excessive_precision)]
     fn test_analytic_neg() {
         let tests = vec![
             (15.552795737560736, 7.5742261696821, (1.6623883316111547, 8.954557110260894e-05)),
@@ -184,6 +185,7 @@ mod tests {
 
     // not as accurate
     #[test]
+    #[allow(clippy::excessive_precision)]
     fn test_analytic_pos() {
         let tests = vec![
             (3.3784348369854293, 0.027475858897771484, (8.948891788456845e-09, 0.003244471792578877)),
