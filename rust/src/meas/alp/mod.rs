@@ -275,13 +275,13 @@ mod tests {
 
     #[test]
     fn test_exponent_next_power_of_two() -> Fallible<()> {
-        assert_eq!(exponent_next_power_of_two(1 as u64), 0);
+        assert_eq!(exponent_next_power_of_two(1_u64), 0);
 
-        assert_eq!(exponent_next_power_of_two(2 as u64), 1);
+        assert_eq!(exponent_next_power_of_two(2_u64), 1);
 
-        assert_eq!(exponent_next_power_of_two(3 as u64), 2);
+        assert_eq!(exponent_next_power_of_two(3_u64), 2);
 
-        assert_eq!(exponent_next_power_of_two(7 as u64), 3);
+        assert_eq!(exponent_next_power_of_two(7_u64), 3);
 
         Ok(())
     }
