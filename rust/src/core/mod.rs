@@ -465,7 +465,7 @@ mod tests {
     fn test_identity() {
         let input_domain = AllDomain::<i32>::new();
         let output_domain = AllDomain::<i32>::new();
-        let function = Function::new(|arg: &i32| arg.clone());
+        let function = Function::new(|arg: &i32| arg);
         let input_metric = L1Distance::<i32>::default();
         let output_metric = L1Distance::<i32>::default();
         let stability_relation = StabilityRelation::new_from_constant(1);

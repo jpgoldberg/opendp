@@ -24,6 +24,7 @@ pub fn generate_bindings(modules: IndexMap<String, Module>) -> IndexMap<PathBuf,
         .expect("failed reading type hierarchy json");
     let hierarchy: HashMap<String, Vec<String>> = serde_json::from_str(&contents).unwrap();
 
+    #[allow(clippy::redundant_clone)] // borrow checker fails without this clone
     modules.into_iter()
         .map(|(module_name, module)| (
             PathBuf::from(format!("{}.py", if module_name == "data".to_string() {"_data".to_string()} else {module_name.clone()})),
@@ -207,14 +208,14 @@ fn generate_docstring(func: &Function, func_name: &String, hierarchy: &HashMap<S
 
 /// generate the part of a docstring corresponding to an argument
 fn generate_docstring_arg(arg: &Argument, hierarchy: &HashMap<String, Vec<String>>) -> String {
-    let name = arg.name.clone().unwrap_or_else(String::new);
+    let name = arg.name.clone().unwrap_or_default();
     format!(r#":param {name}: {description}{type_}"#,
             name = name,
             type_ = arg.python_type_hint(hierarchy)
                 .map(|v| if v.as_str() == "RuntimeTypeDescriptor" {":ref:`RuntimeTypeDescriptor`".to_string()} else {v})
                 .map(|v| format!("\n:type {}: {}", name, v))
                 .unwrap_or_else(String::new),
-            description = arg.description.clone().unwrap_or_else(String::new))
+            description = arg.description.clone().unwrap_or_default())
 }
 
 /// generate the part of a docstring corresponding to a return argument
